@@ -1,0 +1,28 @@
+Análisis del Sistema Bancario
+Built-ins y Bibliotecas Utilizadas
+Bibliotecas Estándar de Python
+
+json: Para serializar y deserializar datos de clientes en formato JSON
+os: Para verificar la existencia de archivos en el sistema de archivos
+datetime: Para registrar fechas y horas de transacciones y actualizaciones
+
+Built-in Functions
+
+print(): Para mostrar mensajes y resultados en consola
+input(): Para capturar entrada del usuario
+float(): Para convertir strings a números decimales
+str(): Para convertir valores a cadenas de texto
+open(): Para abrir y manipular archivos
+len(): Para obtener la longitud de secuencias
+enumerate(): Para iterar con índice en el historial
+list(): Para convertir diccionarios a listas
+dict.get(): Para obtener valores de diccionarios con valor por defecto
+
+Características del Lenguaje
+
+super(): Para llamar al constructor de la clase padre
+try/except: Para manejo de excepciones
+with: Para manejo seguro de archivos (context manager)
+f-strings: Para formateo de strings
+List comprehension implícita: En las operaciones con diccionarios
+Métodos mágicos: __init__(), __str__()

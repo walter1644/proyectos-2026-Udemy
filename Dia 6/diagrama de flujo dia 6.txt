@@ -1,0 +1,67 @@
+┌────────────────────┐
+│ Inicio del programa│
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│ limpiar_pantalla() │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────┐
+│ contar_recetas()   │
+└─────────┬──────────┘
+          │
+          ▼
+┌────────────────────────────┐
+│ mostrar_menu_principal()   │
+└─────────┬──────────────────┘
+          │
+          ▼
+   ┌───────────────┐
+   │ Opción elegida│
+   └───────┬───────┘
+           │
+ ┌─────────┼───────────────────────────────────────────┐
+ │         │                                           │
+ ▼         ▼                                           ▼
+[1]       [2]                                         [3]
+Leer      Crear receta                               Crear categoría
+receta
+
+ │         │                                           │
+ ▼         ▼                                           ▼
+mostrar   mostrar                                   crear_categoria
+categoríascategorías                                   │
+ │         │                                           ▼
+ ▼         ▼                                     volver_inicio
+elegir    elegir
+categoría categoría
+ │         │
+ ▼         ▼
+mostrar   crear_receta
+recetas       │
+ │             ▼
+ ▼         volver_inicio
+elegir
+receta
+ │
+ ▼
+leer_receta
+ │
+ ▼
+volver_inicio
+
+ ┌─────────────────────────────────────────────────────┐
+ │ [4] Eliminar receta                                 │
+ │ [5] Eliminar categoría                              │
+ │ (flujo análogo con confirmación y volver_inicio)   │
+ └─────────────────────────────────────────────────────┘
+
+           ▼
+        [6] Salir
+           │
+           ▼
+┌────────────────────┐
+│ Fin del programa   │
+└────────────────────┘

@@ -1,0 +1,1 @@
+Dentro del print coloco los input asi mato 2 pajaros de un tiro, uso concatenacion con los simbolos "+" y el \n para saltar de linea

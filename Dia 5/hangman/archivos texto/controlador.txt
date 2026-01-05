@@ -1,0 +1,35 @@
+Clase ControladorJuego
+Su función es coordinar todos los módulos: vista, entrada, palabras, persistencia y estadísticas. No aplica reglas directamente (eso lo hace LogicaJuego), sino que organiza el flujo del programa.
+
+Métodos principales
+__init__: recibe los módulos externos (vista, entrada, palabras, persistencia, estadísticas) y prepara la lógica del juego.
+
+ejecutar: arranca el programa, muestra el menú principal y gestiona la opción elegida (jugar, instrucciones, estadísticas, salir).
+
+_mostrar_menu_principal: despliega el menú y devuelve la acción seleccionada.
+
+_elegir_dificultad: permite elegir nivel (fácil, medio, difícil).
+
+_jugar_partida: ejecuta una partida completa: selecciona palabra, crea el estado y gestiona las acciones del jugador (letra o pista).
+
+_procesar_letra: maneja la entrada de una letra, verifica si es correcta y comprueba victoria o derrota.
+
+_procesar_pista: gestiona el uso de una pista, revela una letra y verifica si con ella se gana.
+
+_finalizar_victoria: muestra mensajes de victoria, calcula puntuación, actualiza estadísticas y guarda en archivo.
+
+_finalizar_derrota: muestra mensaje de derrota, actualiza estadísticas y guarda en archivo.
+
+_preguntar_jugar_de_nuevo: pregunta si el jugador quiere repetir la partida.
+
+👉 En resumen:
+
+LogicaJuego define las reglas.
+
+EstadoJuego guarda el estado actual.
+
+Estadisticas lleva el historial del jugador.
+
+GestorPersistencia asegura que todo se guarde en disco.
+
+Y ControladorJuego es el coordinador que hace que todo trabaje en conjunto.

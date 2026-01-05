@@ -1,0 +1,40 @@
+Clase LogicaJuego
+Agrupa métodos estáticos que aplican las reglas sobre el estado de la partida (EstadoJuego).
+
+verificar_letra(letra, estado)  
+Comprueba si la letra está en la palabra:
+
+Si acierta, la agrega a letras_correctas y suma un acierto.
+
+Si falla, la agrega a letras_incorrectas y resta un intento.
+Devuelve True o False según el resultado.
+
+verificar_victoria(estado)  
+Revisa si el jugador ya acertó todas las letras únicas de la palabra.
+Devuelve True si ganó.
+
+verificar_derrota(estado)  
+Revisa si el jugador se quedó sin intentos.
+Devuelve True si perdió.
+
+usar_pista(estado)  
+Revela una letra oculta al azar:
+
+La agrega a letras_correctas.
+
+Suma una pista usada y resta un intento.
+
+Recalcula los aciertos.
+Devuelve la letra revelada o None si no quedan letras ocultas.
+
+calcular_puntuacion(estado)  
+Calcula la puntuación final:
+
+Base de 100 puntos.
+
++20 por cada intento restante.
+
++10 por cada letra de la palabra (dificultad).
+
+−30 por cada pista usada.
+Nunca devuelve menos de 0.

@@ -1,0 +1,50 @@
+def mostrar_ahorcado(vidas):
+print(estados[vidas])
+
+Recibe un número de vidas (0 a 6) con una lista de 7 dibujos ASCII diferentes, el valor del indice corresponde al dibujo por eso no tiene un numero como tal
+
+def mostrar_tablero(palabra, letras_correctas):
+
+Crea una lista vacía llamada lista_oculta,recorre cada letra de la palabra.
+Si la letra está en letras_correctas, la agrega tal cual.
+
+Si no, agrega un guion '-'
+
+Por ultimo, une la lista en un string separado por espacios y lo imprime.
+
+La función mostrar_estado_juego reúne en un solo bloque toda la información del ahorcado: imprime un encabezado visual, muestra el dibujo según las vidas restantes, revela la palabra con las letras acertadas, lista las letras incorrectas si las hay, indica cuántas vidas quedan y cuántas pistas se usaron, y finalmente cierra con otro separador, ofreciendo así una vista clara y completa del estado actual del juego.
+
+La función mostrar_menu_principal imprime un menú ordenado y claro para el jugador: muestra un encabezado con líneas de separación, el título del juego y las opciones numeradas para jugar, leer instrucciones, ver estadísticas o salir, ofreciendo así una interfaz sencilla y fácil de entender.
+
+mostrar_menu_dificultad presenta las opciones de nivel (fácil, medio, difícil).
+
+mostrar_menu_accion ofrece las acciones posibles durante la partida (elegir letra o usar pista).
+
+mostrar_instrucciones explica las reglas básicas del juego y cómo se pierden vidas.
+
+mostrar_estadisticas muestra el rendimiento del jugador con partidas jugadas, ganadas, perdidas, porcentaje de victorias y rachas.
+
+mostrar_victoria imprime un mensaje de felicitación con la palabra encontrada, puntuación, vidas restantes y pistas usadas.
+
+mostrar_derrota indica el final del juego, dibuja el ahorcado completo y revela la palabra oculta.
+
+mostrar_pista señala una letra como ayuda.
+
+mostrar_mensaje sirve para mostrar cualquier texto genérico.
+
+				De dónde vienen los argumentos
+palabra → es la palabra secreta que el juego eligió al inicio (por ejemplo, "guitarra"). Se pasa a las funciones para que sepan qué hay que mostrar o comprobar.
+
+letras_correctas → es una lista que el programa va llenando con las letras que el jugador adivinó bien. Se pasa a mostrar_tablero para revelar esas letras.
+
+letras_incorrectas → es otra lista que guarda las letras falladas. Se pasa a mostrar_estado_juego para mostrarlas en pantalla.
+
+intentos (o “vidas”) → es un contador que se va reduciendo cada vez que el jugador se equivoca. Se pasa a mostrar_ahorcado para elegir el dibujo correcto y a mostrar_estado_juego para mostrar cuántas vidas quedan.
+
+pistas_usadas → es un contador que aumenta cada vez que el jugador pide una pista. Se pasa a mostrar_estado_juego o mostrar_victoria para informar cuántas se usaron.
+
+estadisticas → es un objeto que guarda datos acumulados del jugador (partidas jugadas, ganadas, perdidas, rachas). Se pasa a mostrar_estadisticas para imprimir esos valores.
+
+palabra, puntuacion, vidas_restantes, pistas_usadas en mostrar_victoria → son valores calculados al terminar la partida, que se pasan para mostrar el resultado final.
+
+mensaje en mostrar_mensaje → es simplemente un texto que vos decidís enviar a la función para que lo imprima.

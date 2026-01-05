@@ -1,0 +1,83 @@
+BUILT-INS DE PYTHON
+
+
+
+print() → Muestra información en la salida estándar (consola).
+
+input() → Detiene la ejecución y captura texto ingresado por el usuario.
+
+int() → Convierte un valor (generalmente texto) en un número entero.
+
+str() → Convierte un objeto a su representación en cadena de texto.
+
+len() → Devuelve la cantidad de elementos de una secuencia o colección.
+
+range() → Genera una secuencia numérica usada comúnmente en bucles.
+
+True → Valor booleano que representa verdadero.
+
+False → Valor booleano que representa falso.
+
+None → Representa ausencia de valor o retorno nulo
+
+
+
+MÉTODOS DE str
+
+
+
+lower() → Convierte una cadena a minúsculas para comparaciones seguras.
+
+isnumeric() → Verifica si una cadena contiene solo caracteres numéricos.
+
+
+
+pathlib.Path (CLASE Y MÉTODOS)
+
+
+
+Path() → Crea un objeto que representa una ruta del sistema de archivos.
+
+Path.glob() → Devuelve archivos que coinciden con un patrón dado.
+
+Path.iterdir() → Itera sobre los archivos y carpetas dentro de una ruta.
+
+Path.read_text() → Lee el contenido completo de un archivo de texto.
+
+Path.write_text() → Escribe texto en un archivo, sobrescribiéndolo o creándolo.
+
+Path.unlink() → Elimina un archivo del sistema.
+
+Path.mkdir() → Crea una carpeta en la ruta indicada.
+
+Path.rmdir() → Elimina una carpeta vacía.
+
+Path.name → Devuelve el nombre del archivo o carpeta sin la ruta.
+
+
+
+MÓDULO os
+
+
+
+os.path.exists() → Verifica si un archivo o carpeta existe en el sistema.
+
+os.system() → Ejecuta un comando del sistema operativo desde Python.
+
+
+
+ESTRUCTURAS DEL LENGUAJE (NO FUNCIONES)
+
+
+
+if / elif / else → Controlan la ejecución condicional del programa.
+
+while → Ejecuta un bloque de código mientras una condición sea verdadera.
+
+for → Itera sobre una secuencia de elementos.
+
+return → Finaliza una función y devuelve un valor.
+
+not → Niega una condición lógica.
+
+in → Verifica pertenencia dentro de una secuencia o colección.

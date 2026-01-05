@@ -1,0 +1,33 @@
+Archivo main.py
+Su función es inicializar los módulos y poner en marcha el juego.
+
+Pasos principales
+Importa los módulos:
+
+Vista: maneja lo que se muestra al jugador.
+
+GestorEntrada: gestiona lo que el jugador escribe o selecciona.
+
+GestorPalabras: provee las palabras según dificultad.
+
+GestorPersistencia: guarda y carga estadísticas en archivo.
+
+Estadisticas: lleva el historial del jugador.
+
+ControladorJuego: coordina todo.
+
+Función main():
+
+Crea los objetos de cada módulo.
+
+Carga estadísticas guardadas (si existen) en el objeto Estadisticas.
+
+Crea el ControladorJuego con todos los componentes.
+
+Llama a controlador.ejecutar() para iniciar el bucle principal del juego.
+
+Bloque final if __name__ == "__main__"::
+
+Garantiza que main() se ejecute solo si corres este archivo directamente, no si se importa desde otro módulo.
+
+👉 En resumen: main.py es como el interruptor de encendido de tu consola de mezcla. No hace la música ni aplica reglas, pero conecta todos los módulos y los pone a funcionar juntos.

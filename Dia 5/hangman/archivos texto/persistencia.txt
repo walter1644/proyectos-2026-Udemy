@@ -1,0 +1,7 @@
+Clase GestorPersistencia: se encarga de la persistencia de datos, es decir, que las estadísticas no se pierdan cuando se cierra el programa.
+
+__init__: define el archivo donde se guardarán los datos (por defecto estadisticas_ahorcado.json).
+
+cargar_estadisticas: intenta abrir ese archivo y leer las estadísticas en formato JSON. Si el archivo no existe o hay un error, devuelve None.
+
+guardar_estadisticas: recibe un diccionario con estadísticas y lo escribe en el archivo JSON, con sangría para que quede legible.

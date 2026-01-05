@@ -1,0 +1,13 @@
+obtener_opcion_menu() → no recibe argumentos porque simplemente espera que el jugador escriba un número en el menú principal.
+
+obtener_dificultad() → igual, no necesita argumentos: pide al jugador elegir entre 1, 2 o 3.
+
+obtener_letra(letras_usadas) → aquí sí hay un argumento:
+
+letras_usadas es una lista que el programa mantiene con todas las letras que el jugador ya probó.
+
+Se pasa como argumento para que la función pueda validar si la nueva letra ya fue usada o no.
+
+obtener_accion() → no recibe argumentos, solo espera que el jugador elija entre las acciones disponibles (1 o 2).
+
+obtener_confirmacion(mensaje) → recibe un argumento mensaje, que es el texto que vos querés mostrar al jugador (ejemplo: "¿Deseas salir? (s/n): "). El programa lo pasa para que la función sepa qué preguntar.

@@ -1,0 +1,78 @@
+Clase EstadoJuego
+Representa el estado actual de una partida (tipo ahorcado).
+
+__init__(palabra, letras_unicas)  
+Inicializa una nueva partida con:
+
+palabra: la palabra a adivinar.
+
+letras_unicas: las letras distintas que contiene la palabra.
+Además crea variables para:
+
+letras_correctas y letras_incorrectas → listas vacías para registrar intentos.
+
+intentos = 6 → vidas disponibles.
+
+aciertos = 0 → cuántas letras correctas lleva el jugador.
+
+juego_terminado = False → indica si la partida sigue activa.
+
+pistas_usadas = 0 → contador de pistas.
+
+reiniciar(palabra, letras_unicas)  
+Reinicia el estado para una nueva partida.
+Básicamente vuelve a llamar al constructor (__init__) con la nueva palabra y sus letras únicas, reseteando todo.
+
+Clase Estadisticas
+Maneja las estadísticas acumuladas del jugador.
+
+__init__()  
+Inicializa las estadísticas en cero:
+
+partidas_jugadas, partidas_ganadas, partidas_perdidas, racha_actual, mejor_racha.
+
+registrar_victoria()  
+Cuando el jugador gana:
+
+Suma 1 a partidas_jugadas.
+
+Suma 1 a partidas_ganadas.
+
+Incrementa la racha_actual.
+
+Si la racha_actual supera la mejor_racha, la actualiza.
+
+registrar_derrota()  
+Cuando el jugador pierde:
+
+Suma 1 a partidas_jugadas.
+
+Suma 1 a partidas_perdidas.
+
+Reinicia la racha_actual a 0.
+
+to_dict()  
+Convierte las estadísticas en un diccionario (útil para guardar en archivo o mostrar).
+
+				Acumuladores
+
+En EstadoJuego
+intentos → se va restando cada vez que el jugador falla.
+
+aciertos → se va sumando cada vez que el jugador acierta una letra.
+
+pistas_usadas → se va sumando cada vez que el jugador pide una pista.
+
+
+En Estadisticas
+partidas_jugadas → se incrementa cada vez que termina una partida.
+
+partidas_ganadas → se incrementa si el jugador gana.
+
+partidas_perdidas → se incrementa si el jugador pierde.
+
+racha_actual → se acumula mientras el jugador gana seguido.
+
+mejor_racha → se actualiza si la racha actual supera la mejor histórica.
+
+En resumen: ves muchos acumuladores porque el juego necesita memoria de lo que pasó antes. Sin ellos, cada jugada sería independiente y no podrías saber si ganaste, perdiste o cuál es tu récord.

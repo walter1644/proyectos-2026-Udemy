@@ -1,0 +1,50 @@
+Palabras.py
+
+def __init__(self):
+    self.palabras_jugadas = []
+Se ejecuta cuando creas el gestor: gestor = GestorPalabras()
+Crea una lista vacía palabras_jugadas que guardará las palabras que ya usaste para evitar que salga la misma palabra dos veces seguidas.
+
+ El método obtener_palabras_por_dificultad.
+Recibe un texto: 'facil', 'medio' o 'dificil' y devuelve la lista correspondiente, pero si le das algo raro, devuelve las palabras medias por defecto.
+
+El método elegir_palabra (EL MÁS IMPORTANTE):
+
+Filtrar palabras ya jugadas mediante
+
+-palabras_disponibles = [p for p in lista_palabras if p not in 	self.palabras_jugadas]
+
+Crea una nueva lista solo con palabras que NO están en palabras_jugadas, en resumen, tacha las que ya usaste.
+
+
+
+if not palabras_disponibles:
+    self.palabras_jugadas.clear()
+    palabras_disponibles = lista_palabras
+
+Si palabras_disponibles está vacía (ya jugaste todas),limpia palabras_jugadas para empezar de nuevo para que todas las palabras están disponibles otra vez.
+
+palabra_elegida = choice(palabras_disponibles)
+explicacion: choice() es una función de Python que elige un elemento aleatorio de una lista
+
+
+self.palabras_jugadas.append(palabra_elegida) Agrega la palabra elegida a la lista de "ya jugadas"
+
+
+letras_unicas = len(set(palabra_elegida))
+
+set() elimina letras duplicadas
+len() cuenta cuántas letras quedan
+¿Por qué? Para saber cuántos aciertos necesitas para ganar
+
+
+return palabra_elegida, letras_unicas, esto devuelve dos cosas: la palabra y el número de letras únicas
+
+
+def reiniciar_historial(self):
+    self.palabras_jugadas.clear()
+
+Vacía completamente la lista de palabras jugadas
+
+IMPORTANTE!!!!
+Este método NO se usa en el código actual, pero está disponible por si quieres usarlo
