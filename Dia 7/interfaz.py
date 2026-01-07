@@ -1,11 +1,11 @@
-# ==================== interfaz.py ====================
-"""
-Módulo de interfaz de usuario
-Contiene funciones para mostrar menús y interactuar con el usuario
-"""
+"""Módulo de interfaz de usuario, contiene funciones para mostrar menús e interactuar
+con el usuario."""
+
+
 from constantes import (
     OPCION_DEPOSITAR, OPCION_RETIRAR, 
-    OPCION_HISTORIAL, OPCION_SALIR
+    OPCION_HISTORIAL, OPCION_SALIR,
+    OPCION_ELIMINAR
 )
 from utilidades import mostrar_titulo
 
@@ -17,6 +17,7 @@ def mostrar_menu():
     print(f"({OPCION_DEPOSITAR}) Depositar")
     print(f"({OPCION_RETIRAR}) Retirar")
     print(f"({OPCION_HISTORIAL}) Ver historial")
+    print(f"({OPCION_ELIMINAR}) Eliminar cuenta")
     print(f"({OPCION_SALIR}) Salir")
     mostrar_titulo("", "=", 40)
 

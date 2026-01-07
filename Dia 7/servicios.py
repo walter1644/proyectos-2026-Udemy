@@ -1,29 +1,23 @@
-# ==================== servicios.py ====================
-"""
-Módulo de servicios bancarios
-Contiene la lógica de negocio para operaciones bancarias
-"""
+"""Módulo de servicios bancarios.
+Contiene la lógica de negocio para operaciones bancarias"""
+
 from modelos import Cliente
-from utilidades import obtener_monto, obtener_texto, mostrar_titulo
+from utilidades import obtener_monto, obtener_texto, mostrar_titulo, obtener_numero
 from constantes import (
     OPCION_DEPOSITAR, OPCION_RETIRAR,
-    OPCION_HISTORIAL, OPCION_SALIR
+    OPCION_HISTORIAL, OPCION_SALIR,
+    OPCION_ELIMINAR
 )
 from interfaz import mostrar_menu
 from persistencia import (
     cliente_existe, cargar_cliente, 
-    guardar_cliente, listar_numeros_cuenta
+    guardar_cliente, listar_numeros_cuenta,
+    eliminar_cliente
 )
 
 def crear_nueva_cuenta(numero_cuenta):
     """
-    Crea una nueva cuenta de cliente
-    
-    Args:
-        numero_cuenta (str): Número de cuenta para el nuevo cliente
-    
-    Returns:
-        Cliente: Instancia del nuevo cliente creado
+    Solicita datos para crear una nueva cuenta y la guarda
     """
     print("\n📝 Creando nueva cuenta...")
     mostrar_titulo("CREACIÓN DE NUEVA CUENTA")
@@ -36,21 +30,84 @@ def crear_nueva_cuenta(numero_cuenta):
     guardar_cliente(cliente)
     
     print("\n✅ ¡Cuenta creada y guardada exitosamente!")
-    return cliente
 
+    if numero_cuenta in listar_numeros_cuenta():
+        print("Esta cuenta ya existe")
+        return cliente
 
-def crear_cliente():
-    """
-    Crea un nuevo cliente o carga uno existente
+def mostrar_todas_cuentas():
+    """Muestra lista de todas las cuentas registradas"""
+    cuentas = listar_numeros_cuenta()
     
-    Returns:
-        Cliente: Instancia del cliente creado o cargado
-    """
+    if cuentas:
+        print("\n" + "="*40)
+        print("CUENTAS REGISTRADAS EN EL SISTEMA")
+        print("="*40)
+        for i, num in enumerate(cuentas, 1):
+            print(f"{i}. Cuenta: {num}")
+        print("="*40)
+    else:
+        print("\n⚠️ No hay cuentas registradas en el sistema")
+
+
+
+def procesar_eliminacion_cuenta():
+    """Elimina una cuenta del sistema"""
+    print("\n⚠️  ADVERTENCIA: Esta acción es irreversible")
+    
+    while True:
+        numero_cuenta = input("Ingrese el número de cuenta a eliminar (Enter para cancelar): ").strip()
+        
+        # Opción para volver sin hacer nada
+        if numero_cuenta == "":
+            print("🔙 Volviendo al menú...")
+            return
+        
+        # Verificar si la cuenta existe
+        if not numero_cuenta.isdigit():
+            print("Entrada invalida. Solo se permiten números.")
+            continue
+
+        if not cliente_existe(numero_cuenta):
+            print(f"\n❌ La cuenta '{numero_cuenta}' no existe.")
+            
+            # Preguntar si quiere intentar de nuevo
+            continuar = obtener_texto("¿Desea intentar con otra cuenta? (S/N): ").upper()
+            if continuar != 'S':
+                print("🔙 Volviendo al menú...")
+                return
+            else:
+                continue  # Volver a pedir el número de cuenta
+        
+        # Si la cuenta existe, pedir confirmación
+        print(f"\n⚠️  Está por eliminar la cuenta '{numero_cuenta}'")
+        confirmacion = obtener_texto("¿Está seguro? (S/N): ").upper()
+        
+        if confirmacion == 'S':
+            if eliminar_cliente(numero_cuenta):
+                print(f"\n✅ Cuenta '{numero_cuenta}' eliminada exitosamente")
+            else:
+                print("\n❌ Error al eliminar la cuenta")
+            return True # Salir después de eliminar (exitosa o no)
+        else:
+            print("\n🔙 Operación cancelada")
+            
+            # Preguntar si quiere intentar con otra cuenta
+            intentar_otra = obtener_texto("¿Desea eliminar otra cuenta? (S/N): ").upper()
+            if intentar_otra != 'S':
+                print("🔙 Volviendo al menú...")
+                return False
+            # Si dijo 'S', el while continúa y pide otra cuenta
+
+
+
+def busqueda_cliente():
+    """Busca un cliente por número de cuenta o crea uno nuevo"""
     print()
     mostrar_titulo("ACCESO AL SISTEMA")
-    
-    numero_cuenta = obtener_texto("Ingrese su número de cuenta: ")
-    
+
+    numero_cuenta = obtener_numero("Ingrese su número de cuenta: ")
+
     # Verificar si el cliente ya existe
     if cliente_existe(numero_cuenta):
         print("\n¡Cuenta encontrada! Cargando datos...")
@@ -78,6 +135,8 @@ def crear_cliente():
         
         if opcion == 'C':
             return crear_nueva_cuenta(numero_cuenta)
+        if opcion == 'X':
+            return eliminar_cliente(numero_cuenta)
         elif opcion == 'V':
             print("\n↩️  Volviendo al inicio...")
             return None
@@ -125,6 +184,10 @@ def procesar_operacion(cliente):
     
     elif opcion == OPCION_HISTORIAL:
         cliente.mostrar_historial()
+        
+    elif opcion == OPCION_ELIMINAR:
+        se_elimino = procesar_eliminacion_cuenta()
+        return se_elimino  
     
     elif opcion == OPCION_SALIR:
         return False

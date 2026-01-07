@@ -1,8 +1,7 @@
-# ==================== persistencia.py ====================
-"""
-Módulo de persistencia de datos
-Guarda y carga la información de clientes en archivos JSON
-"""
+"""Módulo de persistencia de datos, Guarda y carga la información de clientes en
+archivos JSON
+Este módulo solo maneja el acceso a datos (leer/escribir JSON)"""
+
 import json
 import os
 from datetime import datetime
@@ -12,15 +11,9 @@ ARCHIVO_CLIENTES = "clientes_banco.json"
 
 
 def guardar_cliente(cliente):
-    """
-    Guarda la información del cliente en un archivo JSON
-    
-    Args:
-        cliente (Cliente): Cliente a guardar
-    
-    Returns:
-        bool: True si se guardó exitosamente, False en caso contrario
-    """
+    """Guarda la información del cliente en un archivo JSON.
+    DevuelveTrue si se guardó exitosamente, False en caso contrario"""
+
     try:
         # Leer clientes existentes
         clientes_guardados = cargar_todos_clientes()
@@ -50,15 +43,7 @@ def guardar_cliente(cliente):
 
 
 def cargar_cliente(numero_cuenta):
-    """
-    Carga un cliente específico desde el archivo JSON
-    
-    Args:
-        numero_cuenta (str): Número de cuenta del cliente
-    
-    Returns:
-        dict: Datos del cliente o None si no existe
-    """
+    """Carga un cliente específico desde el archivo JSON y devuelve None si no existe"""
     try:
         clientes = cargar_todos_clientes()
         return clientes.get(numero_cuenta)
@@ -69,8 +54,7 @@ def cargar_cliente(numero_cuenta):
 
 
 def cargar_todos_clientes():
-    """
-    Carga todos los clientes guardados
+    """Carga todos los clientes guardados
     
     Returns:
         dict: Diccionario con todos los clientes (clave: número de cuenta)
@@ -88,40 +72,20 @@ def cargar_todos_clientes():
 
 
 def cliente_existe(numero_cuenta):
-    """
-    Verifica si un cliente existe en el sistema
-    
-    Args:
-        numero_cuenta (str): Número de cuenta a verificar
-    
-    Returns:
-        bool: True si existe, False si no
-    """
+    """Verifica si un cliente existe en el sistema,devuelve True si existe,
+    False si no"""
     clientes = cargar_todos_clientes()
     return numero_cuenta in clientes
 
 
 def listar_numeros_cuenta():
-    """
-    Lista todos los números de cuenta guardados
-    
-    Returns:
-        list: Lista de números de cuenta
-    """
+    """Lista todos los números de cuenta guardados"""
     clientes = cargar_todos_clientes()
     return list(clientes.keys())
 
 
 def eliminar_cliente(numero_cuenta):
-    """
-    Elimina un cliente del sistema
-    
-    Args:
-        numero_cuenta (str): Número de cuenta a eliminar
-    
-    Returns:
-        bool: True si se eliminó, False si no
-    """
+    """Elimina un cliente del sistema"""
     try:
         clientes = cargar_todos_clientes()
         

@@ -1,8 +1,5 @@
-# ==================== modelos.py ====================
-"""
-Módulo de modelos de datos
-Contiene las clases Persona y Cliente
-"""
+"""Módulo de modelos de datos que contiene las clases Persona y Cliente"""
+
 from datetime import datetime
 from persistencia import guardar_cliente 
 
