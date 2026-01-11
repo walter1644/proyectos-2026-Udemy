@@ -1,0 +1,555 @@
+# GUÍA COMPLETA DE ELEMENTOS PYTHON - SISTEMA DE TURNOS FARMACIA
+
+## 1. IMPORTACIONES
+
+### Módulos built-in de Python
+
+```
+from functools import wraps
+```
+- **wraps**: Decorador que preserva metadata de funciones decoradas (__name__, __doc__, etc.)
+
+```
+from typing import Callable, Generator, Dict, List
+```
+- **Callable**: Type hint para funciones
+- **Generator**: Type hint para generadores
+- **Dict**: Type hint para diccionarios
+- **List**: Type hint para listas
+
+```
+from collections import deque
+```
+- **deque**: Cola de doble extremo, eficiente para operaciones FIFO
+
+```
+from datetime import datetime
+```
+- **datetime**: Clase para trabajar con fechas y horas
+
+```
+import json
+```
+- **json**: Módulo para serialización y deserialización JSON
+
+---
+
+## 2. DECORADORES
+
+### Decorador personalizado
+```python
+def decorador_turno(func: Callable) -> Callable:
+```
+- Función que recibe otra función como parámetro
+- Retorna una función modificada
+- Wrapper pattern
+
+```python
+@wraps(func)
+```
+- Decorador built-in que preserva metadata de la función original
+
+```python
+def wrapper(*args, **kwargs):
+```
+- **`*args`**: Captura argumentos posicionales como tupla
+- **`**kwargs`**: Captura argumentos nombrados como diccionario
+
+```python
+return wrapper
+```
+- Retorna la función interna que envuelve la original
+
+---
+
+## 3. CLASES Y MÉTODOS ESPECIALES
+
+### Método Constructor
+
+```python
+def __init__(self, numero: str, area: str):
+```
+- **`__init__`**: Método constructor (dunder method)
+- **self**: Referencia a la instancia actual
+- Se ejecuta automáticamente al crear instancia
+- Parámetros con type hints (: str)
+
+### Métodos Dunder (Magic Methods)
+
+```python
+def __str__(self):
+```
+- **`__str__`**: Representación en string del objeto
+- Se llama con `str(objeto)` o `print(objeto)`
+
+---
+
+## 4. MÉTODOS DE INSTANCIA
+
+### Métodos públicos
+```python
+def marcar_atendido(self):
+    self.atendido = True
+```
+- Método normal de instancia
+- Modifica atributos del objeto
+
+```python
+def to_dict(self) -> dict:
+```
+- **`-> dict`**: Type hint que indica tipo de retorno
+
+### Métodos privados (convención)
+```python
+def _generar_turnos(self, prefijo: str) -> Generator[str, None, None]:
+```
+- **`_nombre`**: Prefijo underscore indica método privado (convención)
+- **Generator[str, None, None]**: Type hint para generador
+
+---
+
+## 5. GENERADORES
+
+```python
+def _generar_turnos(self, prefijo: str) -> Generator[str, None, None]:
+    n = 1
+    while True:
+        yield f"{prefijo} - {n}"
+        n += 1
+```
+- **yield**: Pausa función y retorna valor
+- **while True**: Bucle infinito
+- Generador infinito de valores
+
+```python
+numero_turno = next(self.areas[area]['generador'])
+```
+- **next()**: Función built-in que obtiene siguiente valor del generador
+
+---
+
+## 6. ESTRUCTURAS DE DATOS
+
+### Diccionarios
+
+```python
+self.areas = {
+    'P': {'nombre': 'Perfumería', 'generador': self._generar_turnos('P'), 'contador': 0}
+}
+```
+- **dict**: Estructura clave-valor
+- Diccionarios anidados
+
+```python
+for codigo, info in self.areas.items():
+```
+- **`.items()`**: Método que retorna pares (clave, valor)
+
+```python
+datos.get('turnos', [])
+```
+- **`.get(clave, default)`**: Retorna valor o default si no existe
+
+```python
+{k: v['nombre'] for k, v in self.areas.items()}
+```
+- **Comprensión de diccionario**: Crea dict de forma concisa
+
+### Listas
+
+```python
+self.historial = []
+```
+- **list**: Lista vacía
+
+```python
+self.historial.append(turno)
+```
+- **`.append()`**: Agrega elemento al final
+
+```python
+[turno.to_dict() for turno in turnos]
+```
+- **Comprensión de lista**: Crea lista de forma concisa
+
+```python
+len(self.historial)
+```
+- **len()**: Función built-in que retorna longitud
+
+```python
+list(self.turnos_pendientes[codigo])
+```
+- **list()**: Convierte iterable a lista
+
+### Deque (Double-Ended Queue)
+
+```python
+from collections import deque
+self.turnos_pendientes = {'P': deque()}
+```
+- **deque()**: Cola de doble extremo
+
+```python
+self.turnos_pendientes[area].append(turno)
+```
+- **`.append()`**: Agrega al final
+
+```python
+turno = self.turnos_pendientes[area].popleft()
+```
+- **`.popleft()`**: Remueve y retorna primer elemento (FIFO)
+
+---
+
+## 7. MANEJO DE ARCHIVOS
+
+### Context Manager (with statement)
+
+```python
+with open(self.archivo, 'w', encoding='utf-8') as f:
+```
+- **with**: Gestor de contexto
+- **open()**: Función built-in para abrir archivos
+- **'w'**: Modo escritura
+- **'r'**: Modo lectura
+- **encoding='utf-8'**: Codificación de caracteres
+- **as f**: Asigna archivo a variable
+- Garantiza cierre automático del archivo
+
+### JSON
+
+```python
+json.dump(datos, f, indent=2, ensure_ascii=False)
+```
+- **json.dump()**: Serializa objeto Python a archivo JSON
+- **indent=2**: Formato legible con sangría
+- **ensure_ascii=False**: Permite caracteres especiales (ñ, á, etc.)
+
+```python
+datos = json.load(f)
+```
+- **json.load()**: Deserializa JSON desde archivo a objeto Python
+
+---
+
+## 8. MANEJO DE EXCEPCIONES
+
+### Try-Except
+
+```python
+try:
+    # Código que puede fallar
+except FileNotFoundError:
+    # Excepción específica
+except Exception as e:
+    # Excepción genérica
+```
+- **try**: Bloque de código a intentar
+- **except**: Captura excepciones
+- **as e**: Asigna excepción a variable
+
+### Raise
+
+```python
+raise ValueError(f"Área '{area}' no válida")
+```
+- **raise**: Lanza una excepción
+- **ValueError**: Tipo de excepción built-in
+- **EOFError**: Excepción de fin de archivo
+
+---
+
+## 9. MÉTODOS ESTÁTICOS
+
+```python
+@staticmethod
+def mostrar_menu(areas_disponibles: dict):
+```
+- **@staticmethod**: Decorador built-in
+- No recibe **self**
+- No puede acceder a atributos de instancia
+- Se puede llamar sin instanciar: `Clase.metodo()`
+
+---
+
+## 10. STRINGS Y FORMATO
+
+### F-strings
+
+```python
+f"Área '{area}' no válida"
+```
+- **f"texto {variable}"**: String interpolado
+
+```python
+f"{info['nombre']:15}"
+```
+- **{variable:15}**: Alinea a 15 caracteres
+
+### Métodos de string
+
+```python
+opcion = input(mensaje).upper().strip()
+```
+- **input()**: Lee entrada del usuario
+- **`.upper()`**: Convierte a mayúsculas
+- **`.lower()`**: Convierte a minúsculas
+- **`.strip()`**: Elimina espacios al inicio y final
+- **Encadenamiento de métodos**: Se ejecutan de izquierda a derecha
+
+```python
+', '.join(opciones_validas)
+```
+- **`.join(iterable)`**: Une elementos de lista con separador
+
+### Multiplicación de strings
+
+```python
+"=" * 40
+```
+- Repite string 40 veces
+
+---
+
+## 11. OPERADORES
+
+### Operadores de comparación
+
+```python
+if opcion == 'S':
+```
+- **==**: Igualdad
+- **!=**: Desigualdad
+
+### Operador in
+
+```python
+if area not in self.areas:
+```
+- **in**: Verifica pertenencia en secuencia
+- **not in**: Verifica no pertenencia
+
+### Operadores lógicos
+
+```python
+if not self.turnos_pendientes[area]:
+```
+- **not**: Negación lógica
+- **and**: Y lógico
+- **or**: O lógico
+
+### Operadores de asignación
+
+```python
+self.areas[area]['contador'] += 1
+```
+- **+=**: Incremento (equivale a: `contador = contador + 1`)
+- **-=**: Decremento
+- **=**: Asignación simple
+
+---
+
+## 12. ESTRUCTURAS DE CONTROL
+
+### If-Elif-Else
+
+```python
+if opcion == 'S':
+    # código
+elif opcion == 'E':
+    # código
+else:
+    # código
+```
+
+### While
+
+```python
+while True:
+    # Bucle infinito
+```
+
+```python
+while self.ejecutando:
+    # Bucle condicional
+```
+
+### For
+
+```python
+for codigo, info in self.areas.items():
+    # Iteración sobre pares clave-valor
+```
+
+```python
+for turno in pendientes:
+    # Iteración sobre lista
+```
+
+---
+
+## 13. BOOLEANOS
+
+```python
+self.atendido = False
+self.ejecutando = True
+```
+- **True**: Verdadero
+- **False**: Falso
+- **Truthiness**: Valores que evalúan como True/False
+  - Vacío ([], {}, "", 0) → False
+  - No vacío → True
+
+---
+
+## 14. OPERADOR TERNARIO
+
+```python
+estado = "✅ Atendido" if self.atendido else "⏳ En espera"
+```
+- **valor_si_true if condicion else valor_si_false**
+
+---
+
+## 15. DATETIME
+
+```python
+from datetime import datetime
+self.timestamp = datetime.now()
+```
+- **datetime.now()**: Fecha y hora actual
+
+```python
+self.timestamp.isoformat()
+```
+- **`.isoformat()`**: Convierte a formato ISO 8601 (string)
+
+---
+
+## 16. NONE
+
+```python
+def metodo(self) -> None:
+```
+- **None**: Valor nulo de Python
+- Indica ausencia de valor
+
+---
+
+## 17. ATRIBUTOS Y ACCESO
+
+### Atributos de instancia
+
+```python
+self.numero = numero
+```
+- **self.atributo**: Atributo de instancia
+
+### Acceso a diccionarios
+
+```python
+self.areas[area]['nombre']
+```
+- **dict[clave]**: Acceso por clave
+- Lanza KeyError si no existe
+
+### Acceso a atributos
+
+```python
+turno.numero
+turno.area
+```
+- **objeto.atributo**: Acceso a atributo
+
+---
+
+## 18. RETURN
+
+```python
+return numero_turno
+return {k: v['nombre'] for k, v in self.areas.items()}
+```
+- **return**: Retorna valor y termina función
+- Puede retornar cualquier tipo de dato
+
+---
+
+## 19. PRINT
+
+```python
+print("Mensaje")
+print(f"Variable: {valor}")
+```
+- **print()**: Imprime en consola
+- Puede recibir múltiples argumentos
+
+---
+
+## 20. TYPE HINTS (ANOTACIONES DE TIPO)
+
+```python
+def metodo(self, area: str) -> str:
+```
+- **: str**: Tipo del parámetro
+- **-> str**: Tipo de retorno
+- No son obligatorios, solo documentación
+- Ayudan a IDEs y linters
+
+```python
+turnos: List[Turno]
+areas_disponibles: Dict[str, str]
+```
+- Tipos genéricos con tipos internos
+
+---
+
+## 21. PATRONES UTILIZADOS
+
+### Patrón Singleton implícito
+```python
+self.persistencia = GestorPersistencia(archivo_historial)
+```
+- Una instancia de GestorPersistencia por GestorTurnos
+
+### Patrón Decorator
+```python
+@decorador_turno
+def obtener_turno(self, area: str) -> str:
+```
+
+### Patrón Strategy implícito
+```python
+mapa_areas = {'1': 'P', '2': 'F', '3': 'C'}
+```
+- Mapeo de opciones a acciones
+
+---
+
+## RESUMEN DE FUNCIONES BUILT-IN USADAS
+
+1. **print()** - Imprime en consola
+2. **len()** - Longitud de secuencia
+3. **next()** - Siguiente valor de iterador/generador
+4. **list()** - Convierte a lista
+5. **str()** - Convierte a string
+6. **open()** - Abre archivo
+7. **input()** - Lee entrada del usuario
+
+## RESUMEN DE DECORADORES USADOS
+
+1. **@wraps** - Preserva metadata de función
+2. **@staticmethod** - Método estático
+3. **@decorador_turno** - Decorador personalizado
+
+## RESUMEN DE MÉTODOS ESPECIALES (DUNDER)
+
+1. **__init__** - Constructor
+2. **__str__** - Representación en string
+
+## RESUMEN DE EXCEPCIONES
+
+1. **ValueError** - Error de valor
+2. **FileNotFoundError** - Archivo no encontrado
+3. **Exception** - Excepción genérica
+4. **EOFError** - Fin de archivo

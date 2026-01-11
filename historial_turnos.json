@@ -1,0 +1,23 @@
+{
+  "turnos": [
+    {
+      "numero": "P - 1",
+      "area": "Perfumería",
+      "timestamp": "2026-01-11T12:48:47.423668",
+      "atendido": false
+    },
+    {
+      "numero": "F - 1",
+      "area": "Farmacia",
+      "timestamp": "2026-01-11T12:48:55.614219",
+      "atendido": true
+    },
+    {
+      "numero": "C - 1",
+      "area": "Cosmética",
+      "timestamp": "2026-01-11T12:49:00.190233",
+      "atendido": false
+    }
+  ],
+  "ultima_actualizacion": "2026-01-11T12:49:04.038911"
+}
