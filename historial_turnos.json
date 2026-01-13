@@ -1,23 +1,68 @@
 {
   "turnos": [
     {
-      "numero": "P - 1",
-      "area": "Perfumería",
-      "timestamp": "2026-01-11T12:48:47.423668",
-      "atendido": false
-    },
-    {
       "numero": "F - 1",
       "area": "Farmacia",
-      "timestamp": "2026-01-11T12:48:55.614219",
-      "atendido": true
+      "timestamp": "2026-01-13 18:17",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
     },
     {
-      "numero": "C - 1",
-      "area": "Cosmética",
-      "timestamp": "2026-01-11T12:49:00.190233",
-      "atendido": false
+      "numero": "F - 2",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:17",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
+    },
+    {
+      "numero": "F - 3",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:17",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
+    },
+    {
+      "numero": "F - 4",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:20",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
+    },
+    {
+      "numero": "F - 5",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:20",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
+    },
+    {
+      "numero": "F - 6",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:20",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
+    },
+    {
+      "numero": "F - 7",
+      "area": "Farmacia",
+      "timestamp": "2026-01-13 18:20",
+      "atendido": false,
+      "prioridad": false,
+      "estado": "🔴 En espera",
+      "prioridad_texto": "⚪ Normal"
     }
   ],
-  "ultima_actualizacion": "2026-01-11T12:49:04.038911"
+  "ultima_actualizacion": "13/01/2026 18:20"
 }

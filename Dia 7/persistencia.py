@@ -25,7 +25,7 @@ def guardar_cliente(cliente):
             'numero_cuenta': cliente.numero_cuenta,
             'balance': cliente.balance,
             'historial': cliente.historial,
-            'ultima_actualizacion': datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            'ultima_actualizacion': datetime.now().strftime("%d/%m/%Y %H:%M")
         }
         
         # Actualizar o agregar el cliente
