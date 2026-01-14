@@ -7,7 +7,6 @@
 from typing import Generator, Dict  # Importa type hints
 from collections import deque  # Importa cola de doble extremo
 from turno import Turno  # Importa clase Turno
-from decoradores import decorador_turno  # Importa decorador personalizado
 from persistencia import GestorPersistencia  # Importa gestor de persistencia
 
 
@@ -67,7 +66,6 @@ class GestorTurnos:  # Define clase gestora de turnos
             yield f"{prefijo} - {n}"  # Genera y pausa, retornando turno formateado
             n += 1  # Incrementa contador
     
-    @decorador_turno  # Aplica decorador a este método
     def obtener_turno(self, area: str) -> str:  # Método para sacar nuevo turno
         """Obtiene el siguiente turno para el área especificada"""
         if area not in self.areas:  # Verifica si área existe
@@ -81,6 +79,14 @@ class GestorTurnos:  # Define clase gestora de turnos
         self.areas[area]['contador'] += 1  # Incrementa contador de área
         
         self.persistencia.guardar_historial(self.historial)  # Guarda historial en archivo
+        
+        # Presentación del turno (antes era parte del decorador)
+        print("\n" + "=" * 40)
+        print("Su número es:")
+        print(f"  >>> {numero_turno} <<<")
+        print("Aguarde y será atendido")
+        print("=" * 40 + "\n")
+
         return numero_turno  # Retorna número de turno
     
     def llamar_turno(self, area: str) -> Turno:  # Método para atender turno

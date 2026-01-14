@@ -15,7 +15,7 @@ class Turno:  # Define clase Turno
         """Marca el turno como atendido"""
         self.atendido = True  # Cambia atributo a True
     
-    def serializar(self) -> dict:  # Método que convierte objeto a diccionario
+    def serializar(self) -> dict:  # type hint que indica lo que el método va a devolver.
         """Convierte el turno a diccionario para guardar"""
         return {  # Retorna diccionario con datos del turno
             'numero': self.numero,  # Incluye número de turno
