@@ -21,20 +21,19 @@ nros_encontrados = []  # Lista vacía para almacenar los números de serie encon
 archivos_encontrados = []  # Lista vacía para almacenar los nombres de archivos donde se encontraron números
 
 def buscar_numero(archivo, patron):  # Define función que busca un patrón en un archivo
-    este_archivo = open(archivo, 'r')  # Abre el archivo en modo lectura
-    texto = este_archivo.read()  # Lee todo el contenido del archivo
-    if re.search(patron, texto):  # Si encuentra el patrón en el texto
-        return re.search(patron, texto)  # Retorna el objeto Match con el resultado
-    else:  # Si no encuentra el patrón
-        return ''  # Retorna string vacío
+    try:
+        with open(archivo, 'r', encoding='utf-8', errors='ignore') as este_archivo:
+            texto = este_archivo.read()
+            return re.search(patron, texto) or '' 
+    except Exception as e: 
+        return '' # Si el archivo no se puede leer, lo ignoramos
 
 def crear_listas():  # Define función que recorre directorios y crea las listas de resultados
-    for carpeta, subcarpeta, archivo in os.walk(ruta):  # Recorre todo el árbol de directorios desde 'ruta'
-        for a in archivo:  # Itera sobre cada archivo en la carpeta actual
-            resultado = buscar_numero(Path(carpeta,a), mi_patron)  # Busca el patrón en el archivo actual
-            if resultado != '':  # Si se encontró un número de serie
+    for archivo in Path(ruta).rglob('*'):  # Itera sobre cada archivo en la carpeta actual y sus subcarpetas
+            resultado = buscar_numero(archivo, mi_patron)  # Busca el patrón en el archivo actual
+            if resultado:  # Si se encontró un número de serie
                 nros_encontrados.append((resultado.group()))  # Agrega el número encontrado a la lista
-                archivos_encontrados.append(a.title())  # Agrega el nombre del archivo en formato Title a la lista
+                archivos_encontrados.append(archivo.name.title())  # Agrega el nombre del archivo en formato Title a la lista
 
 #carpeta guarda ruta y 'a' guarda el nombre del archivo, luego se crea un objeto Path con ambos para abrir el archivo y buscar el patrón
 
@@ -44,12 +43,19 @@ def mostrar_todo():  # Define función que muestra los resultados en formato de 
     indice = 0  # Inicializa contador para sincronizar las dos listas
     print('-' * 50)  # Imprime línea separadora de 50 guiones
     print(f'Fecha de búsqueda: {hoy.day}/{hoy.month}/{hoy.year}')  # Imprime la fecha actual en formato dd/mm/aaaa
-    print('\n')  # Imprime línea en blanco
-    print('ARCHIVO\t\t\tNRO. SERIE')  # Imprime encabezado de la tabla
-    print('-------\t\t\t----------')  # Imprime separador del encabezado
-    for a in archivos_encontrados:  # Itera sobre cada archivo encontrado
-        print(f'{a}\t{nros_encontrados[indice]}')  # Imprime el titulo del archivo y su número de serie
-        indice += 1  # Incrementa el índice para acceder al siguiente número de serie
+    print('\n') # Imprime línea en blanco
+    
+    
+    if not nros_encontrados: # ✅ Verificación aquí print("No se encontraron números de serie en el directorio.") else:
+        print("No se encontraron números de serie en el directorio.")
+    else:
+        print('ARCHIVO\t\tNRO. SERIE')  # Imprime encabezado de la tabla
+        print('-------\t\t----------')  # Imprime separador del encabezado
+        for a in archivos_encontrados:  # Itera sobre cada archivo encontrado
+            print(f'{a}\t{nros_encontrados[indice]}')  # Imprime el titulo del archivo y su número de serie
+            indice += 1  # Incrementa el índice para acceder al siguiente número de serie
+    
+    
     print('\n')  # Imprime línea en blanco
     print(f'Números encotrados: {len(nros_encontrados)}')  # Imprime la cantidad total de números encontrados
     fin = time.time()  # Guarda el tiempo de finalización del programa
